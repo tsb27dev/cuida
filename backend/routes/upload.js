@@ -37,3 +37,21 @@ router.post('/', parser.single('image'), (req, res) => {
 });
 
 module.exports = router;
+
+router.post('/', parser.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'Nenhuma imagem enviada' });
+    }
+    // se quiseres ver a resposta completa do Cloudinary:
+    console.log('Upload bem-sucedido:', req.file);
+
+    return res.json({
+      url: req.file.path,         // URL pública da imagem
+      public_id: req.file.filename
+    });
+  } catch (err) {
+    console.error('Erro no upload:', err);
+    return res.status(500).json({ error: 'Falha no upload', details: err.message });
+  }
+});
