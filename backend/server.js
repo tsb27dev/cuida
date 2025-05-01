@@ -11,6 +11,11 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
+const uploadRoutes = require('./routes/upload');
+
+app.use('/upload', uploadRoutes);
+
+
 // Rotas públicas
 app.use('/auth', authRoutes);
 
