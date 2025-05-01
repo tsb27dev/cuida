@@ -24,6 +24,7 @@ app.get('/me', authMiddleware, (req, res) => {
   res.json({ user: { id: req.user.id, name: req.user.name, email: req.user.email } });
 });
 
-app.listen(3000, () => {
-  console.log('Servidor a correr em http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor a correr em http://localhost:${PORT}`);
 });
